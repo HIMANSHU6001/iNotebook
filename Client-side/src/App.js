@@ -5,20 +5,25 @@ import {
   Route,
 } from "react-router-dom";
 
-import { Navbar } from './Components/Navbar';
-import { Home } from './Components/Home';
-import { About } from './Components/About';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import NoteState from './context/notes/NoteState';
 
 function App() {
   return (
     <>
-    <Router>
-      <Navbar/>
-      <Routes>
-        <Route exact path='/about' element={<About/>}/>
-        <Route exact path='/' element={<Home/>}/> 
-      </Routes>
-    </Router>
+      <NoteState>
+        <Router>
+          <Navbar />
+          <div className="container">
+            <Routes>
+              <Route exact path='/about' element={<About />} />
+              <Route exact path='/' element={<Home />} />
+            </Routes>
+          </div>
+        </Router>
+      </NoteState>
     </>
   );
 }
