@@ -18,13 +18,14 @@ router.post('/createuser', [
 
   // catching Errors
   try {
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ success, errors: errors.array() });
     }
     let user = await User.findOne({ email: req.body.email });
     if (user) {
-      return res.status(400).json({ error: "Sorry, this email is already registred" })
+      return res.status(400).json({success,  error: "Sorry, this email is already registred" })
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -41,8 +42,9 @@ router.post('/createuser', [
       }
     }
 
-    const authToken = jwt.sign(data, JWT_SECRET)
-    return res.json({ authToken });
+    const authToken = jwt.sign(data, JWT_SECRET);
+    success = true;
+    return res.json({success, authToken });
 
   } catch (error) {
     return res.status(400).json({ error: "Internal Server Error" })
@@ -55,7 +57,7 @@ router.post('/login', [
   body('email', "Enter a Valid Email.").isEmail(),
   body('password', "Password cannot be blank.").exists()
 ], async (req, res) => {
-
+  let success=false;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -77,8 +79,9 @@ router.post('/login', [
         id: user.id
       }
     }
-    const authToken = jwt.sign(data, JWT_SECRET)
-    return res.json({ authToken });
+    const authToken = jwt.sign(data, JWT_SECRET);
+    success = true;
+    return res.json({success, authToken });
   } catch (error) {
     console.error(error);
     return res.status(400).json({ error: "Internal Server Error" })
