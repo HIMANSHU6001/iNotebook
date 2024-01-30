@@ -24,15 +24,15 @@ export default function AddNote() {
         <form className='my-3' onSubmit={(e) => handleSubmit(e)}>
           <div className="mb-3">
             <label htmlFor="title" className="form-label">Title</label>
-            <input type="text" value={note.title} onChange={(e)=> onChangeHandler(e)} name="title" className="form-control" id="title" aria-describedby="emailHelp" minLength={5} required/>
+            <input type="text" value={note.title} onChange={onChangeHandler} name="title" className="form-control" id="title" aria-describedby="emailHelp" minLength={5} required/>
          </div>
           <div className="mb-3">
             <label htmlFor="description" className="form-label">Description</label>
-            <input value={note.description} onChange={(e)=> onChangeHandler(e)} type="text" className="form-control" name="description" id="description" minLength={5} required/>
+            <input value={note.description} onChange={onChangeHandler} type="text" className="form-control" name="description" id="description" minLength={5} required/>
           </div>
           <div className="mb-3">
             <label htmlFor="tag" className="form-label">Tag</label>
-            <input value={note.tag} onChange={(e)=> onChangeHandler(e)} type="text" className="form-control" name="tag" id="tag" />
+            <input value={note.tag} onChange={onChangeHandler} type="text" className="form-control" name="tag" id="tag" />
           </div>
           <button type='submit' disabled={note.title.length < 5 || note.description.length < 5  } className="btn btn-primary">AddNote</button>
         </form>

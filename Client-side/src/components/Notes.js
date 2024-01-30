@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import noteContext from '../context/notes/noteContext'
 import Noteitem from './Noteitem';
 import AddNote from './AddNote'
+import { useNavigate } from 'react-router-dom';
 
 export default function Notes() {
     const context = useContext(noteContext);
@@ -10,8 +11,17 @@ export default function Notes() {
     const refClose = useRef(null);
     const ref = useRef(null);
 
+    let navigate = useNavigate()
     useEffect(() => {
-        fetchAllNotes();
+        if (localStorage.getItem('token')){
+            console.log(localStorage.getItem('token'));
+            fetchAllNotes();
+        }
+        else {
+            navigate("/login");
+            console.log(localStorage.getItem('token'));
+        }
+        // eslint-disable-next-line
     }, [])
 
     const updateNote = (currentNote) => {
@@ -50,15 +60,15 @@ export default function Notes() {
                             <form className='my-3' onSubmit={(e) => e.preventDefault()}>
                                 <div className="mb-3">
                                     <label htmlFor="etitle" className="form-label">Title</label>
-                                    <input type="text" value={note.etitle} onChange={(e) => onChangeHandler(e)} name="etitle" className="form-control" id="etitle" minLength={5} required/>
+                                    <input type="text" value={note.etitle} onChange={onChangeHandler} name="etitle" className="form-control" id="etitle" minLength={5} required/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="edescription" className="form-label">Description</label>
-                                    <input onChange={(e) => onChangeHandler(e)} value={note.edescription} type="text" className="form-control" name="edescription" id="edescription" minLength={5} required/>
+                                    <input onChange={onChangeHandler} value={note.edescription} type="text" className="form-control" name="edescription" id="edescription" minLength={5} required/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="etag" className="form-label">Tag</label>
-                                    <input onChange={(e) => onChangeHandler(e)} value={note.etag} type="text" className="form-control" name="etag" id="etag" />
+                                    <input onChange={onChangeHandler} value={note.etag} type="text" className="form-control" name="etag" id="etag" />
                                 </div>
                             </form>
                         </div>
