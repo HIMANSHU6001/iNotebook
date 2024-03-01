@@ -1,0 +1,8 @@
+@tailwind base;
+*{
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+}
+@tailwind components;
+@tailwind utilities;
+
