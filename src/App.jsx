@@ -1,17 +1,22 @@
 import './App.css';
-import Main from './components/Main';
-import Sidebar from './components/Sidebar';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+import Home from './pages/Home';
+import About from './pages/About';
+import LoginSignup from './pages/LoginSignup';
 
 
 export default function App() {
   return (
-    <div className='grid grid-flow-row grid-cols-12 grid-rows-1 h-[100vh]'>
-      <div className='col-span-2 h-[100vh]'>
-        <Sidebar />
-      </div>
-      <div className='col-span-10 h-[100vh]'> 
-        <Main />
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/about"  element={<About />}/>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/loginsignup" element={<LoginSignup/>}/>
+      </Routes>
+  </Router>
   )
 }

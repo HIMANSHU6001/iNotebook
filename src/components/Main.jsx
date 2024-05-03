@@ -38,12 +38,12 @@ export default function Main() {
       <div className="grid grid-flow-row grid-cols-4 ml-3 mt-7">
         <div className="border-2 m-1 rounded-md grid grid-flow-row grid-cols-1 pt-3">
           <div>
-            <p className='text-xs text-[#8A8A8A] mx-5 my-2 '>12 June 2024
+            <div className='text-xs text-[#8A8A8A] mx-5 my-2 '>12 June 2024
             <div className='float-right'>
               {Heart}
               {Edit}
               {Trash}
-            </div></p>
+            </div></div>
           </div>
           <h3 className='my-3 mx-5'>
             {BusinessBullet} <span className='ml-2'>Meeting with a client</span>

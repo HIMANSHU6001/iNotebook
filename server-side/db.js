@@ -1,8 +1,9 @@
-
+require('dotenv').config()
 const mongoose = require('mongoose');
 
 async function connectToMongo() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/inotebook');
+    console.log("Connecting to Mongo.....");
+    await mongoose.connect(process.env.URI);
     console.log("Connected to Mongo");
     }
 
