@@ -1,13 +1,15 @@
 import React from 'react'
-import { Home, Info, User, Trash, LogOut, Heart, Add, Search, Edit, Filter, DownArrow, BusinessBullet, PersonalBullet, ProjectBullet } from '../assets/icons/icons';
+import { Home, Info, User, Trash, LogOut, Heart, Add, Search, Edit, Filter, DownArrow } from '../assets/icons/icons';
+
+
 
 export default function Main() {
   return (
     <div className='h-[100vh] overflow-y-scroll'>
       <div className='grid grid-flow-row grid-cols-3 '>
         <div className=" col-span-2">
-          <div className="grid grid-flow-col grid-cols-12 row mt-4 ml-3 border-2 border-primary rounded-lg text-lg text-gray-300 ">
-            <div className="col-span-11 pl-1 py-1 ml-2">Search</div>
+          <div className="grid grid-flow-col grid-cols-12 row mt-4 ml-3 border-2 border-primary rounded-lg  ">
+            <input type='text' className="col-span-11 pl-1 py-1 ml-2 border-none outline-none focus:border-red-600" placeholder='Search '/>
             <button className="col-span-1">
               <div className=' my-auto text-primary ' >
                 {Search}
@@ -16,9 +18,10 @@ export default function Main() {
           </div>
         </div>
         <div className=" col-span-1  " >
-          <div className='text-right mt-5 mr-24 text-lg'>
+          <button className='block text-right mt-5 mr-24 text-lg'>
             {Filter} Sort {DownArrow}
-          </div>
+          </button>
+          <div>dropdown</div>
         </div>
       </div>
       <div className='mt-6 ml-4'>
@@ -36,14 +39,14 @@ export default function Main() {
         </button>
       </div>
       <div className="grid grid-flow-row grid-cols-4 ml-3 mt-7">
-        <div className="border-2 m-1 rounded-md grid grid-flow-row grid-cols-1 pt-3">
+        {/* <div className="border-2 m-1 rounded-md grid grid-flow-row grid-cols-1 pt-3">
           <div>
-            <div className='text-xs text-[#8A8A8A] mx-5 my-2 '>12 June 2024
+            <p className='text-xs text-[#8A8A8A] mx-5 my-2 '>12 June 2024
             <div className='float-right'>
               {Heart}
               {Edit}
               {Trash}
-            </div></div>
+            </div></p>
           </div>
           <h3 className='my-3 mx-5'>
             {BusinessBullet} <span className='ml-2'>Meeting with a client</span>
@@ -51,8 +54,8 @@ export default function Main() {
           <p className='text-xs text-[#8A8A8A] mx-5  my-2'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...
           </p>
-        </div>
-        <div className="border-2 m-1 rounded-md grid grid-flow-row grid-cols-1 pt-3">
+        </div> */}
+        {/* <div className="border-2 m-1 rounded-md grid grid-flow-row grid-cols-1 pt-3">
           <div>
             <p className='text-xs text-[#8A8A8A] mx-5 my-2 '>12 June 2024
             <div className='float-right'>
@@ -211,23 +214,7 @@ export default function Main() {
           <p className='text-xs text-[#8A8A8A] mx-5  my-2'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...
           </p>
-        </div>
-        <div className="border-2 m-1 rounded-md grid grid-flow-row grid-cols-1 pt-3">
-          <div>
-            <p className='text-xs text-[#8A8A8A] mx-5 my-2 '>12 June 2024
-            <div className='float-right'>
-              {Heart}
-              {Edit}
-              {Trash}
-            </div></p>
-          </div>
-          <h3 className='my-3 mx-5'>
-            {BusinessBullet} <span className='ml-2'>Meeting with a client</span>
-          </h3>
-          <p className='text-xs text-[#8A8A8A] mx-5  my-2'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...
-          </p>
-        </div>
+        </div> */}
       </div>
     </div>
   )

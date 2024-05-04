@@ -1,7 +1,14 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
+
+let tags = {
+    "Business":"#F88F15",
+    "Personal":"#37B7FF",
+    "Project":"#D8D360",
+}
+
 const UserSchema = new Schema({
-    Username:{
+    name:{
         type: String,
         required: true
     },
@@ -17,6 +24,11 @@ const UserSchema = new Schema({
     date:{
         type: Date,
         default: Date.now
+    },
+    tags:{
+        type: Map,
+        of: String,
+        default: tags,
     }
 })
 const User = mongoose.model('user',UserSchema)

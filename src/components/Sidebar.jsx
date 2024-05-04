@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AddModal from './AddModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
-import { Home, Info, User, Trash, LogOut, Heart, Add, Search, Edit, Filter, DownArrow, BusinessBullet, PersonalBullet, ProjectBullet } from '../assets/icons/icons';
+import { Home, Info, User, Trash, LogOut, Heart, Add, Search, Edit, Filter, DownArrow } from '../assets/icons/icons';
+import AddTagModal from './AddTagModal';
+import UserContext from '../context/notes/userContext';
+import Bullet from './Bullet';
 
 
 export default function Sidebar() {
+
+  const userContext = useContext(UserContext);
+  const { currentTags, createTag, fetchTags } = userContext;
+
+  useEffect(() => {
+    fetchTags()
+  }, [])
+
+
   const [username, setUsername] = useState('Username');
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false)
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isAddTagOpen, setIsAddTagOpen] = useState(false);
 
   return (
     <div className=' grid-flow-row grid-cols-1 bg-gray_bg pl-5 h-[100vh] overflow-y-auto'>
@@ -34,11 +47,11 @@ export default function Sidebar() {
         QUICK LINKS
       </div>
 
-      <button onClick={()=>{setIsAddModalOpen(true)}} className='row mt-[20px] block' type="button">
-      {Add}
+      <button onClick={() => { setIsAddModalOpen(true) }} className='row mt-[20px] block' type="button">
+        {Add}
         <p className='inline-block text-[13px]'>Add new notes</p>
       </button>
-     {isAddModalOpen && <AddModal setIsAddModalOpen={setIsAddModalOpen} isAddModalOpen={isAddModalOpen}/>}
+      {isAddModalOpen && <AddModal setIsAddModalOpen={setIsAddModalOpen} isAddModalOpen={isAddModalOpen} />}
 
       <button className='row mt-[10px] block'>
         {Heart}
@@ -58,22 +71,21 @@ export default function Sidebar() {
       <div className='mt-[40px] text-[18px]'>
         NOTES
       </div>
-      <button className='row mt-[20px] relative block'>
-        {BusinessBullet}
-        <p className='inline-block text-[13px] ml-5'>Business</p>
-      </button>
-      <button className='row mt-[10px] relative block'>
-        {PersonalBullet}
-        <p className='inline-block text-[13px] ml-5'>Personal</p>
-      </button>
-      <button className='row mt-[10px] relative block'>
-        {ProjectBullet}
-        <p className='inline-block text-[13px] ml-5'>Project</p>
-      </button>
-      <button className='row mt-[10px] block'>
+
+      {Object.keys(currentTags).length === 0 && "No Tags to display"}
+      {Object.keys(currentTags).map((key) => {
+        return <button className='row mt-[20px] relative block'>
+          <Bullet color={currentTags[key]}/>
+          <p className='inline-block text-[13px] ml-5'> {key}</p>
+        </button>
+      })}
+
+      <button onClick={() => { setIsAddTagOpen(true) }} className='row mt-[10px] block'>
         {Add}
         <p className='inline-block text-[13px]'>Add new tags</p>
       </button>
+      {isAddTagOpen && <AddTagModal setIsAddTagOpen={setIsAddTagOpen} isAddTagOpen={isAddTagOpen} />}
+
     </div>
   )
 }

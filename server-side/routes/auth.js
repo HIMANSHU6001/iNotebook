@@ -11,7 +11,7 @@ const fetchuser = require("../middleware/fetchuser")
 
 // Route1: Create a User using: POST "/api/auth/createuser"
 router.post('/createuser', [
-
+  
   //authenticating inputs
   body('email', "Enter a Valid Email.").isEmail(),
   body('name', "Min length is 3.").isLength({ min: 3 }),
@@ -101,5 +101,54 @@ router.post("/getuser", fetchuser,
       return res.status(400).json({ error: "Internal Server Error" })
     }
   })
+
+// Route 4: update user tags: PUT "/api/auth/updateuser/:id" login Required
+router.put("/updateuser/:id",fetchuser,
+  async(req,res) => {
+    try {
+      const { tags } = req.body;
+      const userId = req.params.id;
+      let user = await User.findById(userId);
+      if (!user) { return res.status(404).send("Not Found") }
+      if (user.id.toString() !== userId) { return res.status(401).send("Not Allowed"); }
+      for (const key in tags) {
+        if (Object.hasOwnProperty.call(tags, key)) {
+          const element = tags[key];
+          user.tags.set(key,element);
+        }
+      }
+      await user.save()
+      return res.status(200).json(user)
+    }
+    catch(error){
+      console.log(error);
+      return res.status(500).json({ error: "Internal Server Error" })
+    }
+  }
+)
+// router.put('/updatenote/:id', fetchuser, async (req, res) => {
+//   try {
+//       const { title, description, tag, fav } = req.body;
+//       const newNote = {}
+
+//       // setting values to be updated
+//       if (title) { newNote.title = title; }
+//       if (description) { newNote.description = description; }
+//       if (tag) { newNote.tag = tag; }
+//       if (fav) {newNote.fav = fav}
+
+//       // finding the note to be updated
+//       let note = await Note.findById(req.params.id);
+//       if (!note) { return res.status(404).send("Not Found") }
+//       if (note.user.toString() !== req.user.id) {
+//           return res.status(401).send("Not Allowed");
+//       }
+//       note = await Note.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true })
+//       res.send(note)
+//   } catch (error) {
+//       console.error(error);
+//       return res.status(500).json({ error: "Internal Server Error" })
+//   }
+// })
 
 module.exports = router 
