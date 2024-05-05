@@ -12,7 +12,7 @@ import Bullet from './Bullet';
 export default function Sidebar() {
 
   const userContext = useContext(UserContext);
-  const { currentTags, createTag, fetchTags } = userContext;
+  const { currentTags, createTag, fetchTags, login, signup, logout} = userContext;
 
   useEffect(() => {
     fetchTags()
@@ -23,6 +23,9 @@ export default function Sidebar() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isAddTagOpen, setIsAddTagOpen] = useState(false);
 
+  const handleLogOut = () => {
+    logout()
+  }
   return (
     <div className=' grid-flow-row grid-cols-1 bg-gray_bg pl-5 h-[100vh] overflow-y-auto'>
       <div>
@@ -61,7 +64,7 @@ export default function Sidebar() {
         {Trash}
         <p className='inline-block text-[13px]'>Recently deleted</p>
       </button>
-      <button className='row mt-[10px] block'>
+      <button onClick={() => {handleLogOut()}} className='row mt-[10px] block'>
         {LogOut}
         <p className='inline-block text-[13px]'>Logout</p>
       </button>
@@ -80,10 +83,10 @@ export default function Sidebar() {
         </button>
       })}
 
-      <button onClick={() => { setIsAddTagOpen(true) }} className='row mt-[10px] block'>
+      {Object.keys(currentTags).length>6 ? null: <button onClick={() => { setIsAddTagOpen(true) }} className='row mt-[10px] block'>
         {Add}
         <p className='inline-block text-[13px]'>Add new tags</p>
-      </button>
+      </button>}
       {isAddTagOpen && <AddTagModal setIsAddTagOpen={setIsAddTagOpen} isAddTagOpen={isAddTagOpen} />}
 
     </div>

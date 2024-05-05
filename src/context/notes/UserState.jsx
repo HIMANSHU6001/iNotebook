@@ -1,18 +1,75 @@
 import React from 'react'
 import UserContext from './userContext'
 import { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function UserState(props) {
-
+    const navigate = useNavigate()
     const host = "http://localhost:5000"
     const { showAlert } = props;
     let tagsInitial = {}
     const [currentTags, setTags] = useState(tagsInitial);
 
     useEffect(() => {
-        console.log("USEEFFECT",currentTags);
+        console.log("current tags => ",currentTags);
       }, [currentTags])
-      
+
+
+    const getUserData = async() => {
+        const url = `${host}/api/auth/getuser`
+        const response = await fetch(url, {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('token')
+            }
+        });
+        const json = await response.json();
+        console.log("JSON FRON GET USER => ",json);
+    }
+
+    const login = async(values) => {
+        const url = `${host}/api/auth/login`
+        const response = await fetch(url, {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email:values.email , password:values.password}) 
+        });
+        const json = await response.json();
+        if (json.success){
+            localStorage.setItem('token', json.authToken);
+            // props.showAlert("LoggedIn successfully", 'success')
+            navigate("/")
+        } else {
+            props.showAlert("Failed to LogIn", 'danger')
+        }
+    }
+
+    const signup = async(values) => {
+        const url = `${host}/api/auth/createuser`
+        const response = await fetch(url, {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name:values.name, email:values.email , password:values.password}) 
+        });
+        const json = await response.json();
+        if (json.success){
+            localStorage.setItem('token', json.authToken);
+            // props.showAlert("LoggedIn successfully", 'success')
+            navigate("/")
+        } else {
+            props.showAlert("Failed to SignUp", 'danger')
+        }
+    }
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        navigate("/loginsignup")
+    }
 
     const fetchTags = async() => {
         const url = `${host}/api/auth/getUser`;
@@ -20,7 +77,7 @@ function UserState(props) {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVhYTVjNjdhMWM0MzU2MjkzN2NiYWJhIn0sImlhdCI6MTcxNDc5MzU2N30.Q7b8PH0RFUBT7Butj56dPd8qJDa_ZQmGOBcUEEyxS6Q"
+                'auth-token': localStorage.getItem('token')
             },
         })
         const json = await response.json();
@@ -33,7 +90,7 @@ function UserState(props) {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVhYTVjNjdhMWM0MzU2MjkzN2NiYWJhIn0sImlhdCI6MTcxNDc5MzU2N30.Q7b8PH0RFUBT7Butj56dPd8qJDa_ZQmGOBcUEEyxS6Q"
+                'auth-token': localStorage.getItem('token')
             },
         })
         const json = await response.json();
@@ -44,14 +101,14 @@ function UserState(props) {
             method:"PUT",
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVhYTVjNjdhMWM0MzU2MjkzN2NiYWJhIn0sImlhdCI6MTcxNDc5MzU2N30.Q7b8PH0RFUBT7Butj56dPd8qJDa_ZQmGOBcUEEyxS6Q"
+                'auth-token': localStorage.getItem('token')
             },
             body: JSON.stringify({tags:tag})
         })
         setTags({...tag, ...currentTags})
     }
   return (
-    <UserContext.Provider value={{currentTags, createTag, fetchTags}}>
+    <UserContext.Provider value={{currentTags,setTags, createTag, fetchTags, login, signup, logout}}>
         {props.children}
     </UserContext.Provider>
   )

@@ -1,10 +1,10 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useContext } from 'react'
 import { Formik, Form, Field } from 'formik';
+import UserContext from '../context/notes/userContext';
 
 function AddModal(props) {
-
-    const [tags, setTags] = useState(['Business', 'Project', 'Personal'])
+    const userContext = useContext(UserContext);
+    const {currentTags} = userContext
 
     const validateTitle = (value) => {
         let error;
@@ -78,9 +78,9 @@ function AddModal(props) {
                                         <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag</label>
                                         <Field className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5' as="select" name="tag" validate={validateTag}>
                                             <option value="">Select a tag</option>
-                                            <option value="Business">Business</option>
-                                            <option value="Personal">Personal</option>
-                                            <option value="Project">Project</option>
+                                            {Object.keys(currentTags).map((key) => {
+                                                return <option value={key}>{key}</option>
+                                            } )}
                                         </Field>
                                         {errors.tag && touched.tag && <p className='float-right text-xs text-red-600'>{errors.tag}</p>}
                                     </div>

@@ -1,14 +1,36 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Main from '../components/Main';
 import Sidebar from '../components/Sidebar';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import noteContext from '../context/notes/noteContext';
+import UserContext from '../context/notes/userContext';
 
 function Home() {
+  const navigate = useNavigate();
+  const NoteContext = useContext(noteContext);
+  const userContext = useContext(UserContext);
+  const { currentTags, createTag, fetchTags, login, signup } = userContext;
+  const { notes, setNotes, addNote, deleteNote, editNote, fetchAllNotes } = NoteContext;
+
+  useEffect(() => {
+    
+    if (localStorage.getItem('token')) {
+      console.log(localStorage.getItem('token'));
+      fetchAllNotes();
+      fetchTags()
+      // eslint-disable-next-line
+    }
+    else {
+      navigate("/loginsignup")
+    }
+  }, [])
   return (
     <div className='grid grid-flow-row grid-cols-12 grid-rows-1 h-[100vh]'>
       <div className='col-span-2 h-[100vh]'>
         <Sidebar />
       </div>
-      <div className='col-span-10 h-[100vh]'> 
+      <div className='col-span-10 h-[100vh]'>
         <Main />
       </div>
     </div>

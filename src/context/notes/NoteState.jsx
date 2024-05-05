@@ -5,7 +5,7 @@ const NoteState = (props) => {
     const host = "http://localhost:5000"
     let notesInitial = []
     const [notes, setNotes] = useState(notesInitial);
-    const { showAlert } = props;
+    // const { showAlert } = props; TODO
 
     // Get all Notes
     const fetchAllNotes = async () => {
