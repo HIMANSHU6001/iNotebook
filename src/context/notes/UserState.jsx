@@ -9,6 +9,7 @@ function UserState(props) {
     const { showAlert } = props;
     let tagsInitial = {}
     const [currentTags, setTags] = useState(tagsInitial);
+    const [user, setUser] = useState({})
 
     useEffect(() => {
         console.log("current tags => ",currentTags);
@@ -25,7 +26,7 @@ function UserState(props) {
             }
         });
         const json = await response.json();
-        console.log("JSON FRON GET USER => ",json);
+        setUser(json)
     }
 
     const login = async(values) => {
@@ -63,6 +64,25 @@ function UserState(props) {
             navigate("/")
         } else {
             props.showAlert("Failed to SignUp", 'danger')
+        }
+    }
+
+    const oneTap = async(values) => {
+        const url = `${host}/api/auth/googleonetap`
+        const response = await fetch(url, {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name:values.name, email:values.email , password:values.password}) 
+        });
+        const json = await response.json();
+        if (json.success){
+            localStorage.setItem('token', json.authToken);
+            // props.showAlert("LoggedIn successfully", 'success')
+            navigate("/")
+        } else {
+            console.log("Failed to oneTap sign in")
         }
     }
 
@@ -108,7 +128,7 @@ function UserState(props) {
         setTags({...tag, ...currentTags})
     }
   return (
-    <UserContext.Provider value={{currentTags,setTags, createTag, fetchTags, login, signup, logout}}>
+    <UserContext.Provider value={{user,getUserData,oneTap, currentTags,setTags, createTag, fetchTags, login, signup, logout}}>
         {props.children}
     </UserContext.Provider>
   )

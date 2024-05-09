@@ -11,7 +11,7 @@ const fetchuser = require("../middleware/fetchuser")
 
 // Route1: Create a User using: POST "/api/auth/createuser"
 router.post('/createuser', [
-  
+
   //authenticating inputs
   body('email', "Enter a Valid Email.").isEmail(),
   body('name', "Min length is 3.").isLength({ min: 3 }),
@@ -27,7 +27,7 @@ router.post('/createuser', [
     }
     let user = await User.findOne({ email: req.body.email });
     if (user) {
-      return res.status(400).json({success,  error: "Sorry, this email is already registred" })
+      return res.status(400).json({ success, error: "Sorry, this email is already registred" })
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -46,7 +46,7 @@ router.post('/createuser', [
 
     const authToken = jwt.sign(data, process.env.JWT_SECRET);
     success = true;
-    return res.json({success, authToken });
+    return res.json({ success, authToken });
 
   } catch (error) {
     return res.status(400).json({ error: "Internal Server Error" })
@@ -59,7 +59,7 @@ router.post('/login', [
   body('email', "Enter a Valid Email.").isEmail(),
   body('password', "Password cannot be blank.").exists()
 ], async (req, res) => {
-  let success=false;
+  let success = false;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -83,7 +83,7 @@ router.post('/login', [
     }
     const authToken = jwt.sign(data, process.env.JWT_SECRET);
     success = true;
-    return res.json({success, authToken });
+    return res.json({ success, authToken });
   } catch (error) {
     console.error(error);
     return res.status(400).json({ error: "Internal Server Error" })
@@ -103,8 +103,8 @@ router.post("/getuser", fetchuser,
   })
 
 // Route 4: update user tags: PUT "/api/auth/updateuser/:id" login Required
-router.put("/updateuser/:id",fetchuser,
-  async(req,res) => {
+router.put("/updateuser/:id", fetchuser,
+  async (req, res) => {
     try {
       const { tags } = req.body;
       const userId = req.params.id;
@@ -114,18 +114,67 @@ router.put("/updateuser/:id",fetchuser,
       for (const key in tags) {
         if (Object.hasOwnProperty.call(tags, key)) {
           const element = tags[key];
-          user.tags.set(key,element);
+          user.tags.set(key, element);
         }
       }
       await user.save()
       return res.status(200).json(user)
     }
-    catch(error){
+    catch (error) {
       console.log(error);
       return res.status(500).json({ error: "Internal Server Error" })
     }
   }
 )
+
+// Route5: Authentication of user using googleOneTap: Post "/api/auth/googleonetap" - no login required
+router.post('/googleonetap', async (req, res) => {
+  let success = false;
+  const { email, password } = req.body;
+  try {
+    let user = await User.findOne({ email });
+    if (!user) {
+      const salt = await bcrypt.genSalt(10);
+      const secPass = await bcrypt.hash(req.body.password, salt)
+      user = await User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: secPass,
+      });
+
+      const data = {
+        user: {
+          id: user.id
+        }
+      }
+
+      const authToken = jwt.sign(data, process.env.JWT_SECRET);
+      success = true;
+      console.log("User Created");
+      return res.json({ success, authToken });
+    }
+
+    else {
+      const passComp = await bcrypt.compare(password, user.password)
+      if (!passComp) {
+        return res.status(400).json({ error: "Access Denied" })
+      }
+      const data = {
+        user: {
+          id: user.id
+        }
+      }
+      const authToken = jwt.sign(data, process.env.JWT_SECRET);
+      success = true;
+      console.log("Logged in user");
+      return res.json({ success, authToken });
+    }
+
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ error: "Internal Server Error" })
+  }
+})
 // router.put('/updatenote/:id', fetchuser, async (req, res) => {
 //   try {
 //       const { title, description, tag, fav } = req.body;

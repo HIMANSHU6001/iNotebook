@@ -2,9 +2,14 @@ import React, { useContext } from 'react'
 import { Formik, Form, Field } from 'formik';
 import UserContext from '../context/notes/userContext';
 
+import noteContext from '../context/notes/noteContext';
+
 function AddModal(props) {
+
+    const contextNote = useContext(noteContext);
     const userContext = useContext(UserContext);
-    const {currentTags} = userContext
+    const { notes, setNotes, addNote, deleteNote, editNote, fetchAllNotes } = contextNote;
+    const { currentTags } = userContext
 
     const validateTitle = (value) => {
         let error;
@@ -30,11 +35,10 @@ function AddModal(props) {
 
     const validateTag = (value) => {
         let error;
-        console.log('tag is',value);
         if (!value) {
             error = 'Required';
-        } else if (!tags.includes(value)) {
-            error = 'Select a Tag';
+        } else if (!Object.keys(currentTags).includes(value)) {
+            error = 'Select a valid tag';
         }
         return error;
     }
@@ -62,7 +66,7 @@ function AddModal(props) {
                             description: '',
                         }}
                         onSubmit={values => {
-                            console.log("submitted",values);
+                            addNote(values.title, values.description, values.tag)
                             props.setIsAddModalOpen(false);
                         }}
                     >
@@ -80,7 +84,7 @@ function AddModal(props) {
                                             <option value="">Select a tag</option>
                                             {Object.keys(currentTags).map((key) => {
                                                 return <option value={key}>{key}</option>
-                                            } )}
+                                            })}
                                         </Field>
                                         {errors.tag && touched.tag && <p className='float-right text-xs text-red-600'>{errors.tag}</p>}
                                     </div>

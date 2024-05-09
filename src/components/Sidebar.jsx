@@ -3,87 +3,94 @@ import { Link } from 'react-router-dom';
 import AddModal from './AddModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
-import { Home, Info, User, Trash, LogOut, Heart, Add, Search, Edit, Filter, DownArrow } from '../assets/icons/icons';
+import { Home, Info, User, Trash, LogOut,LikedHeart, Heart, Add, Search, Edit, Filter, DownArrow } from '../assets/icons/icons';
 import AddTagModal from './AddTagModal';
 import UserContext from '../context/notes/userContext';
 import Bullet from './Bullet';
+import noteContext from '../context/notes/noteContext';
 
 
-export default function Sidebar() {
+export default function Sidebar(props) {
 
+  const contextNote = useContext(noteContext);
+  const {filters,setFilters, displayNotes, setDisplayNotes, notes, setNotes, addNote, deleteNote, editNote, fetchAllNotes, likeNote } = contextNote
   const userContext = useContext(UserContext);
-  const { currentTags, createTag, fetchTags, login, signup, logout} = userContext;
-
-  useEffect(() => {
-    fetchTags()
-  }, [])
-
-
-  const [username, setUsername] = useState('Username');
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const {active, setActive, isAddModalOpen, setIsAddModalOpen}= props;
+  const { user, getUserData, currentTags, createTag, fetchTags, login, signup, logout} = userContext;
   const [isAddTagOpen, setIsAddTagOpen] = useState(false);
 
   const handleLogOut = () => {
     logout()
   }
+
+  const handlefavourites = () => {
+      setFilters({...filters, fav: !(filters.fav)})
+  }
+
+  const handleTagClick = (value) => {
+    setFilters({...filters, tag:value})
+    setActive(value)
+  }
+
+  useEffect(() => {
+    fetchTags()
+    getUserData()
+  }, [])
+
   return (
-    <div className=' grid-flow-row grid-cols-1 bg-gray_bg pl-5 h-[100vh] overflow-y-auto'>
-      <div>
-        <Link to='/' className='text-primary text-[25px] font-semibold mt-1'>iNotebook</Link>
+    <div className=' grid-flow-row grid-cols-1 bg-gray_bg h-[100vh] overflow-y-auto'>
+      <div className='mt-4'>
+        <Link to='/' className='text-primary text-[25px] pl-5 font-semibold'>iNotebook</Link>
       </div>
-      <div className="row mt-[35px] relative">
+      <div className="row pl-5 mt-[30px] relative">
         {User}
-        <p className='inline-block text-[16px] absolute top-[25%]'>{username}</p>
+        <p className='inline-block text-[16px] absolute top-[25%]'>{user.name}</p>
       </div>
-      <div className='row mt-[30px]'>
+      <Link to='/' className='block row mt-[10px] py-2 pl-5 hover:bg-primary_light hover:border-r-4 hover:border-primary'>
         {Home}
-        <Link to='/' className='inline-block text-[13px]'>Home</Link>
-      </div>
-      <div className='row mt-[20px]'>
+        <p className='inline-block text-[13px]'>Home</p>
+      </Link>
+      <Link to='/about' className='block row py-2 pl-5 hover:bg-primary_light hover:border-r-4 hover:border-primary'>
         {Info}
-        <Link to='/about' className='inline-block text-[13px]'>About</Link>
-      </div>
+        <p className='inline-block text-[13px]'>About</p>
+      </Link>
 
 
 
-      <div className='mt-[40px] text-[18px]'>
+      <div className='mt-[25px] text-[18px] pl-5'>
         QUICK LINKS
       </div>
 
-      <button onClick={() => { setIsAddModalOpen(true) }} className='row mt-[20px] block' type="button">
+      <button onClick={() => { setIsAddModalOpen(true) }} className='row mt-[20px] w-full text-left block py-2 pl-5 hover:bg-primary_light hover:border-r-4 hover:border-primary' type="button">
         {Add}
-        <p className='inline-block text-[13px]'>Add new notes</p>
+        <p className='inline-block text-[13px] '>Add new notes</p>
       </button>
       {isAddModalOpen && <AddModal setIsAddModalOpen={setIsAddModalOpen} isAddModalOpen={isAddModalOpen} />}
 
-      <button className='row mt-[10px] block'>
-        {Heart}
+      <button onClick={() => handlefavourites()} className='row  w-full text-left block py-2 pl-5 hover:bg-primary_light hover:border-r-4 hover:border-primary'>
+        {filters.fav ? LikedHeart: Heart}
         <p className='inline-block text-[13px]'>Favourites</p>
       </button>
-      <button className='row mt-[10px] block'>
-        {Trash}
-        <p className='inline-block text-[13px]'>Recently deleted</p>
-      </button>
-      <button onClick={() => {handleLogOut()}} className='row mt-[10px] block'>
+      <button onClick={() => {handleLogOut()}} className='row  w-full text-left block py-2 pl-5 hover:bg-primary_light hover:border-r-4 hover:border-primary'>
         {LogOut}
         <p className='inline-block text-[13px]'>Logout</p>
       </button>
 
 
 
-      <div className='mt-[40px] text-[18px]'>
+      <div className='mt-[40px] text-[18px] pl-5'>
         NOTES
       </div>
 
       {Object.keys(currentTags).length === 0 && "No Tags to display"}
       {Object.keys(currentTags).map((key) => {
-        return <button className='row mt-[20px] relative block'>
+        return <button onClick={() => {handleTagClick(key)}} className='row w-full text-left block py-2 pl-5 hover:bg-primary_light hover:border-r-4 hover:border-primary'>
           <Bullet color={currentTags[key]}/>
           <p className='inline-block text-[13px] ml-5'> {key}</p>
         </button>
       })}
 
-      {Object.keys(currentTags).length>6 ? null: <button onClick={() => { setIsAddTagOpen(true) }} className='row mt-[10px] block'>
+      {Object.keys(currentTags).length>6 ? null: <button onClick={() => { setIsAddTagOpen(true) }} className='row w-full text-left block py-2 pl-5 hover:bg-primary_light hover:border-r-4 hover:border-primary'>
         {Add}
         <p className='inline-block text-[13px]'>Add new tags</p>
       </button>}

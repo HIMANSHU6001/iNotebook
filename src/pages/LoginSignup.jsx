@@ -5,10 +5,34 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useContext } from 'react';
 import UserContext from '../context/notes/userContext';
+import { useGoogleOneTapLogin } from 'react-google-one-tap-login'
 
 function LoginSignup() {
+
+
+  const googleOneTap = response => {
+    console.log(response);
+  }
+
+  useGoogleOneTapLogin({
+    onSuccess: (response) => {
+      console.log("response from google onetap", response);
+      let values = {
+        name: response.name,
+        email: response.email,
+        password: response.sub
+      }
+      oneTap(values)
+    },
+    onError: (error) => { console.log("error", error) },
+    googleAccountConfigs: {
+      client_id: '247003230731-5m23u6ilq2bqhtp1jtigs1tqnu5ttjbu.apps.googleusercontent.com',
+      cancel_on_tap_outside: true
+    }
+
+  })
   const userContext = useContext(UserContext);
-  const { currentTags, createTag, fetchTags, login, signup } = userContext;
+  const { currentTags, createTag, fetchTags, oneTap, login, signup } = userContext;
   const [view, setView] = useState("password");
   const [fadeIn, setFadeIn] = useState(null);
   const [slide, setSlide] = useState(null);
@@ -37,6 +61,11 @@ function LoginSignup() {
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required'),
+    confirmPassword: Yup.string()
+      .min(2, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required')
+      .oneOf([Yup.ref('password'), null], "Password does not match"),
     email: Yup.string().email('Invalid email').required('Required'),
   });
 
@@ -118,9 +147,9 @@ function LoginSignup() {
 
 
 
-          <button className='mt-14 w-80 h-12 block rounded-3xl' style={{ "border": '2px solid black' }}>
+          {/* <button className='mt-14 w-80 h-12 block rounded-3xl' style={{ "border": '2px solid black' }}>
             {Google} Continue with Google
-          </button>
+          </button> */}
 
           <div className='w-full mt-10 ml-10 font-semibold' >Dont have an account? <span onClick={() => { togglePage() }} className='cursor-pointer text-red-600'>Sign up</span></div>
         </div>
@@ -134,6 +163,7 @@ function LoginSignup() {
             initialValues={{
               name: '',
               password: '',
+              confirmPassword:'',
               email: '',
             }}
             validationSchema={SignupValidationSchema}
@@ -143,8 +173,7 @@ function LoginSignup() {
             }}
           >
             {({ errors, touched }) => (
-              <Form className='mt-11 w-80'>
-
+              <Form className='mt-8 w-80'>
                 <label htmlFor="name" className='text-zinc-700 font-semibold'>Enter your Name</label>
                 <div className='block mt-2 h-9 w-80 rounded-sm bg-white outline-none' style={{ "border": "1px solid gray" }}>
                   <Field className='h-full w-full pl-3' type="text" name="name" id="name" placeholder='Name' />
@@ -152,21 +181,22 @@ function LoginSignup() {
                 <span className='text-red-400 text-sm border border-white' >{errors.name && touched.name ? errors.name : ''}</span>
 
 
-                <label htmlFor="email" className='text-zinc-700 font-semibold'>Enter your Email address</label>
-                <div className='block mt-2 h-9 w-80 rounded-sm bg-white outline-none' style={{ "border": "1px solid gray" }}>
+                <label htmlFor="email" className='block mt-3 text-zinc-700 font-semibold'>Enter your Email address</label>
+                <div className='block mt-1 h-9 w-80 rounded-sm bg-white outline-none' style={{ "border": "1px solid gray" }}>
                   <Field className='h-full w-full pl-3' type="text" name="email" id="email" placeholder='name@example.com' />
                 </div>
                 <span className='text-red-400 text-sm border border-white' >{errors.email && touched.email ? errors.email : ''}</span>
 
-                <label htmlFor="passwd" className='text-zinc-700 block mt-7 font-semibold'>Enter your Password</label>
+                <label htmlFor="passwd" className='text-zinc-700 block mt-2 font-semibold'>Enter your Password</label>
                 <div className='grid grid-cols-6 mt-2 w-80 h-9 rounded-sm' style={{ "border": "1px solid gray" }} >
-                  <Field className='col-span-5 pl-3 h-full outline-none' type={view} name="password" id="password" placeholder='atleast 8 charecters ' />
-                  <span className=' col-span-1 cursor-pointer m-auto' onClick={() => { toggleView() }}>{view === 'password' ? ClosedEye : OpenEye}</span>
+                  <Field className='col-span-5 pl-3 h-full outline-none' type="password" name="password" id="password" placeholder='Set Password ' />
                 </div>
                 <span className='text-red-400 text-sm border border-white'>{errors.password && touched.password ? errors.password : ""}</span>
-                <span className='text-[14px] text-red-500 text-base float-right' >Forgot Password?</span>
-
-                <button type="submit" className='mt-14  w-80 h-12 block text-white rounded-3xl bg-red-600'>
+                <div className='grid grid-cols-6 mt-2 w-80 h-9 rounded-sm' style={{ "border": "1px solid gray" }} >
+                  <Field className='col-span-5 pl-3 h-full outline-none' type="password" name="confirmPassword" id="confirmPassword" placeholder='Confirm Password ' />
+                </div>
+                <span className='text-red-400 text-sm border border-white'>{errors.confirmPassword && touched.confirmPassword ? errors.confirmPassword : ""}</span>
+                <button type="submit" className='mt-7  w-80 h-12 block text-white rounded-3xl bg-red-600'>
                   Sign up
                 </button>
               </Form>
@@ -175,9 +205,9 @@ function LoginSignup() {
             }
           </Formik>
 
-          <button className='mt-14 w-80 h-12 block rounded-3xl' style={{ "border": '2px solid black' }}>
+          {/* <button className='mt-14 w-80 h-12 block rounded-3xl' style={{ "border": '2px solid black' }}>
             {Google} Continue with Google
-          </button>
+          </button> */}
 
           <div className='w-96 mt-10 ml-10 font-semibold' >Already have an account? <span onClick={() => { togglePage() }} className='cursor-pointer text-red-600'>Log in</span></div>
 

@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router();
 const fetchuser = require("../middleware/fetchuser")
 const Note = require("../models/Note")
-const { body, validationResult } = require("express-validator")
+const { body, validationResult } = require("express-validator");
+const { useLinkClickHandler } = require('react-router-dom');
 
 
 
@@ -48,14 +49,15 @@ router.post('/addnote', fetchuser, [
 // ROUTE 3: Update an existing note using: PUT "/api/notes/updatenote". Login Required
 router.put('/updatenote/:id', fetchuser, async (req, res) => {
     try {
-        const { title, description, tag, fav } = req.body;
-        const newNote = {}
-
+        
+        const { title, description, tag, like } = req.body;
+        const newNote = {};
+        console.log("updating", like);
         // setting values to be updated
         if (title) { newNote.title = title; }
         if (description) { newNote.description = description; }
         if (tag) { newNote.tag = tag; }
-        if (fav) {newNote.fav = fav}
+        if (like || !like) { newNote.fav = like }
 
         // finding the note to be updated
         let note = await Note.findById(req.params.id);
@@ -89,6 +91,23 @@ router.delete('/deletenote/:id', fetchuser, async (req, res) => {
     }
 
 })
+
+// // ROUTE 5: Update an existing note using: PUT "/api/notes/updatenote". Login Required
+// router.put('/likenote/:id', fetchuser, async (req, res) => {
+//     try {
+//         const { like } = req.body;
+//         const userId = req.params.id;
+//         let note = await Note.findById(userId);
+//         if (!user) { return res.status(404).send("Not Found") }
+//         if (user.id.toString() !== userId) { return res.status(401).send("Not Allowed"); }
+//         note.set(fav, like)
+//         note.save()
+//         res.send(note)
+//     } catch (error) {
+//         console.error(error);
+//         return res.status(500).json({ error: "Internal Server Error" })
+//     }
+// })
 
 
 module.exports = router 

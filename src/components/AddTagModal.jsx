@@ -5,7 +5,7 @@ import UserContext from '../context/notes/userContext';
 
 function AddTagModal(props) {
     const userContext = useContext(UserContext);
-    const {currentTags, createTag} = userContext;
+    const { currentTags, createTag } = userContext;
     const [colorPicked, setColorPicked] = useState('#ff4f5b');
 
     const validateName = (value) => {
@@ -61,7 +61,7 @@ function AddTagModal(props) {
                                     </div>
                                     <div className='col-span-2 mt-4'>
                                         <label className=" mb-2 text-sm font-medium text-gray-900 " htmlFor="Description">Select accent color</label>
-                                        <input value={colorPicked} onChange={(e)=>{setColorPicked(e.target.value)}} type='color' className='border border-gray-300 rounded-md ml-3' name="color" />
+                                        <input value={colorPicked} onChange={(e) => { setColorPicked(e.target.value) }} type='color' className='border border-gray-300 rounded-md ml-3' name="color" />
                                     </div>
                                 </div>
                                 <button type="submit" className="text-white mt-4 inline-flex items-center bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:border-primary_light font-medium rounded-lg text-sm px-5 py-2.5 text-center">
