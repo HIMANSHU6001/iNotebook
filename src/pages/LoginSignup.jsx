@@ -93,8 +93,8 @@ function LoginSignup() {
 
   return (
     <div>
-      <div>
-        <div className={`welcome absolute w-3/5 h-full bg-[#FFE1E1] ${slide}`}>
+      <div className=' hidden lg:block'>
+        <div className={`welcome absolute w-3/5 h-screen bg-[#FFE1E1] ${slide}`}>
           <div hidden={!fadeIn} className={`w-fit mt-20 text-2xl mx-auto ${fadeIn === true ? 'fadeIn' : 'fadeOut'}`} >Nice to see you again</div>
           <div hidden={fadeIn} className={`w-fit mt-20 text-2xl mx-auto ${!fadeIn === true ? 'fadeIn' : 'fadeOut'}`} >Let's get you started</div>
           <div hidden={!fadeIn} className={`w-fit text-[#CE0C0C] font-semibold mt-6 text-5xl mx-auto ${fadeIn === true ? 'fadeIn' : 'fadeOut'}`}>Welcome back</div>
@@ -105,8 +105,8 @@ function LoginSignup() {
       </div>
 
 
-      <div className='grid grid-cols-5 grid-rows-1'>
-        <div className="login col-span-2 pl-16 pt-10 w-80">
+      <div className='lg:grid lg:grid-cols-5 lg:grid-rows-1'>
+        <div className={`login w-fit mx-auto lg:block ${currentPage==='Login'? 'hidden':'block'} col-span-2 pl-16 pt-10 `}>
           <h4 className='text-primary text-[40px] font-semibold'>iNotebook</h4>
           <h3 className='text-[30px] font-bold mt-5'>Log in.</h3>
 
@@ -145,17 +145,11 @@ function LoginSignup() {
             }
           </Formik>
 
-
-
-          {/* <button className='mt-14 w-80 h-12 block rounded-3xl' style={{ "border": '2px solid black' }}>
-            {Google} Continue with Google
-          </button> */}
-
           <div className='w-full mt-10 ml-10 font-semibold' >Dont have an account? <span onClick={() => { togglePage() }} className='cursor-pointer text-red-600'>Sign up</span></div>
         </div>
         <div></div>
 
-        <div className="signup col-span-2 pl-16 pt-10 w-80">
+        <div className={`signup w-fit mx-auto lg:block ${currentPage==='Signup'? 'hidden':'block'} col-span-2 pl-16 pt-10 `}>
           <h4 className='text-primary text-[40px] font-semibold'>iNotebook</h4>
           <h3 className='text-[30px] font-bold mt-5'>Sign up.</h3>
 
@@ -204,10 +198,6 @@ function LoginSignup() {
             )
             }
           </Formik>
-
-          {/* <button className='mt-14 w-80 h-12 block rounded-3xl' style={{ "border": '2px solid black' }}>
-            {Google} Continue with Google
-          </button> */}
 
           <div className='w-96 mt-10 ml-10 font-semibold' >Already have an account? <span onClick={() => { togglePage() }} className='cursor-pointer text-red-600'>Log in</span></div>
 
