@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Home, Info, User, Trash, LogOut, Heart, LikedHeart,WhiteAdd, Add, Search, Edit, Filter, DownArrow, Tick } from '../assets/icons/icons';
+import { Home, Info, User, Trash, LogOut, Heart, LikedHeart, WhiteAdd, Add, Search, Edit, Filter, DownArrow, Tick } from '../assets/icons/icons';
 import UserContext from '../context/notes/userContext';
 import noteContext from '../context/notes/noteContext';
 import Bullet from './Bullet';
 import DeleteModal from './DeleteModal';
 import EditModal from './EditNoteModal';
+import ViewModal from './ViewModal';
 import Fuse from 'fuse.js'
 
 
@@ -13,11 +14,12 @@ export default function Main(props) {
   const contextNote = useContext(noteContext);
   const { setFilters, filters, displayNotes, setDisplayNotes, notes, setNotes, addNote, deleteNote, editNote, fetchAllNotes, likeNote } = contextNote
   const { currentTags, createTag, fetchTags, login, signup, logout } = userContext;
-  const {active, setActive, isAddModalOpen, setIsAddModalOpen}= props;
+  const { active, setActive, isAddModalOpen, setIsAddModalOpen } = props;
   const [dropdown, setDropdown] = useState(false);
   const [doubleDropdown, setDoubleDropdown] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [note, setNote] = useState({});
   const [search, setSearch] = useState("")
   const IMAGES = {
@@ -46,6 +48,21 @@ export default function Main(props) {
     setDisplayNotes(newNotes)
   }
 
+  const getNoteDescription = (note) => {
+    console.log(note);
+    if (note.length > 100) {
+      return note.slice(0, 100) + "..."
+    }
+    return note
+  }
+
+  const getTitle = (title) => {
+    if (title.length > 20) {
+      return title.slice(0, 20) + "..."
+    }
+    return title
+  }
+
   const handleClick = (value) => {
     setFilters({ ...filters, tag: value })
     setActive(value)
@@ -59,6 +76,11 @@ export default function Main(props) {
   const handleDelete = (note) => {
     setNote(note);
     setIsDeleteModalOpen(true)
+  }
+
+  const handleView = (note) => {
+    setNote(note);
+    setIsViewModalOpen(true)
   }
 
   const handleEdit = (note) => {
@@ -145,29 +167,33 @@ export default function Main(props) {
             <h1 className='text-2xl text-center font-semibold text-primary'>No Notes Found</h1>
             <img className='h-3/5 m-auto' src={IMAGES.noNotes} alt="No notes to display" />
           </div> : displayNotes.map(note => {
-            return <div className="border-2 m-1 rounded-md grid grid-flow-row grid-cols-1 pt-3">
+            return <div className="border-2 h-48 m-1 rounded-md grid grid-flow-row grid-cols-1 pt-3 hover:border-primary_light">
               <div>
                 <p className='text-xs text-[#8A8A8A] mx-5 my-2 '>{getDate(note.date)}
                   <div className='float-right'>
                     <button onClick={() => { handleLike(note, note.fav) }}>{note.fav ? LikedHeart : Heart}</button>
                     <button onClick={() => { handleEdit(note) }}>{Edit}</button>
                     <button onClick={() => { handleDelete(note) }}>{Trash}</button>
-                  </div></p>
+                  </div>
+                </p>
               </div>
-              <h3 className='my-3 mx-5'>
-                <Bullet color={currentTags[note.tag]} /> <span className='ml-2'>{note.title}</span>
-              </h3>
-              <p className='text-xs text-[#8A8A8A] mx-5  my-2'>
-                {note.description}
-              </p>
+              <div onClick={() => { handleView(note) }} className='cursor-pointer'>
+                <h3 className=' my-3 mx-5'>
+                  <Bullet color={currentTags[note.tag]} /> <span className='ml-2'>{getTitle(note.title)}</span>
+                </h3>
+                <p  className=' text-xs h-20 overflow-hidden text-wrap whitespace-pre-wrap text-[#8A8A8A] mx-5  my-2'>
+                  {`${getNoteDescription(note.description)}`}
+                </p>
+              </div>
             </div>
           })
           }
         </div>
-        <button onClick={() => {setIsAddModalOpen(true)}} className='fixed bottom-10 right-10 font-semibold text-white bg-primary rounded-full px-3 py-2'> {WhiteAdd} Add note</button>
+        <button onClick={() => { setIsAddModalOpen(true) }} className='fixed bottom-10 right-10 font-semibold text-white bg-primary rounded-full px-3 py-2'> {WhiteAdd} Add note</button>
       </div>
       {isEditModalOpen && <EditModal note={note} setIsEditModalOpen={setIsEditModalOpen} isEditModalOpen={isEditModalOpen} />}
       {isDeleteModalOpen && <DeleteModal noteId={note._id} deleteNote={deleteNote} setIsDeleteModalOpen={setIsDeleteModalOpen} isDeleteModalOpen={isDeleteModalOpen} />}
+      {isViewModalOpen && <ViewModal note={note} setIsViewModalOpen={setIsViewModalOpen} isViewModalOpen={isViewModalOpen} />}
     </>
   )
 }

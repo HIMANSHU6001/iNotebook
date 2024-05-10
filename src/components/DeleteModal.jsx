@@ -3,7 +3,7 @@ import React from 'react'
 function DeleteModal(props) {
     const {noteId ,deleteNote ,isDeleteModalOpen, setIsDeleteModalOpen} = props
   return (
-    <div tabIndex="-1" aria-hidden="true" hidden={!isDeleteModalOpen} className="fixed z-50 top-16 w-full">
+    <div tabIndex="-1" aria-hidden="true" hidden={!isDeleteModalOpen} className="fixed z-50 left-0 top-16 w-full">
     <div  className="m-auto p-4 w-full max-w-md h-full ">
         <div className="relative p-4 text-center bg-white rounded-lg shadow ">
             <button onClick={() => {setIsDeleteModalOpen(false)}} className="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-toggle="deleteModal">

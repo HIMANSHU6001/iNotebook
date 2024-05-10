@@ -42,9 +42,9 @@ export default function Sidebar(props) {
       <div className='mt-4'>
         <Link to='/' className='text-primary text-[25px] pl-5 font-semibold'>iNotebook</Link>
       </div>
-      <div className="row pl-5 mt-[30px] relative">
-        {User}
-        <p className='inline-block text-[16px] absolute top-[25%]'>{user.name}</p>
+      <div className="row pl-5 mt-[30px] grid grid-flow-col grid-col-3" >
+        <div className='col-span-1'>{User}</div>
+        <p className=' col-span-2 text-[15px] my-auto'>{user.name}</p>
       </div>
       <Link to='/' className='block row mt-[10px] py-2 pl-5 hover:bg-primary_light hover:border-r-4 hover:border-primary'>
         {Home}

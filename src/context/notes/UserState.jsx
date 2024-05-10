@@ -41,10 +41,10 @@ function UserState(props) {
         const json = await response.json();
         if (json.success){
             localStorage.setItem('token', json.authToken);
-            // props.showAlert("LoggedIn successfully", 'success')
+            props.showAlert("LoggedIn successfully", 'success')
             navigate("/")
         } else {
-            props.showAlert("Failed to LogIn", 'danger')
+            showAlert("Failed to LogIn", 'danger')
         }
     }
 
@@ -60,10 +60,10 @@ function UserState(props) {
         const json = await response.json();
         if (json.success){
             localStorage.setItem('token', json.authToken);
-            // props.showAlert("LoggedIn successfully", 'success')
+            props.showAlert("LoggedIn successfully", 'success')
             navigate("/")
         } else {
-            props.showAlert("Failed to SignUp", 'danger')
+            showAlert("Failed to SignUp", 'danger')
         }
     }
 
@@ -79,7 +79,7 @@ function UserState(props) {
         const json = await response.json();
         if (json.success){
             localStorage.setItem('token', json.authToken);
-            // props.showAlert("LoggedIn successfully", 'success')
+            showAlert("LoggedIn successfully", 'success')
             navigate("/")
         } else {
             console.log("Failed to oneTap sign in")
@@ -126,6 +126,7 @@ function UserState(props) {
             body: JSON.stringify({tags:tag})
         })
         setTags({...tag, ...currentTags})
+        showAlert("Tag added successfully", "success")
     }
   return (
     <UserContext.Provider value={{user,getUserData,oneTap, currentTags,setTags, createTag, fetchTags, login, signup, logout}}>

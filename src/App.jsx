@@ -25,12 +25,15 @@ export default function App() {
       setAlert(null)
     }, 4000);
   };
+  const closeAlert = () => {
+    setAlert(null)
+  }
 
   return (
     <Router>
       <NoteState showAlert={showAlert}>
         <UserState showAlert={showAlert}>
-          <Alert alert={alert} />
+          <Alert alert={alert} closeAlert={closeAlert}/>
           <Routes>
             <Route path="/about" element={<About />} />
             <Route path="/" element={<Home />} />

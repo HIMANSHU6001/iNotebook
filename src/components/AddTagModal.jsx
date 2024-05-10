@@ -59,7 +59,7 @@ function AddTagModal(props) {
                                         <Field className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type Tag Name" name="tagName" validate={validateName} />
                                         {errors.tagName && touched.tagName && <p className='float-right text-xs text-red-600'>{errors.tagName}</p>}
                                     </div>
-                                    <div className='col-span-2 mt-4'>
+                                    <div className='col-span-2 my-4'>
                                         <label className=" mb-2 text-sm font-medium text-gray-900 " htmlFor="Description">Select accent color</label>
                                         <input value={colorPicked} onChange={(e) => { setColorPicked(e.target.value) }} type='color' className='border border-gray-300 rounded-md ml-3' name="color" />
                                     </div>

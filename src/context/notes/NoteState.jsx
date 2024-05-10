@@ -7,7 +7,8 @@ const NoteState = (props) => {
     const [notes, setNotes] = useState(notesInitial);
     const [displayNotes, setDisplayNotes] = useState([])
     const [filters, setFilters] = useState({ fav: false, tag: "All", newestFirst: null })
-    // const { showAlert } = props; TODO
+    const { showAlert } = props; 
+
     useEffect(() => {
         setDisplayNotes(notes)
     }, [notes])
@@ -88,7 +89,7 @@ const NoteState = (props) => {
         });
         const note = await response.json();
         setNotes(notes.concat(note));
-        // showAlert("Note added successfully", "success");
+        showAlert("Note added successfully", "success");
     }
     // Delete a note
     const deleteNote = async (noteId) => {
@@ -103,8 +104,9 @@ const NoteState = (props) => {
         });
         const newNote = notes.filter((note) => { return note._id !== noteId });
         setNotes(newNote);
-        // showAlert("Note deleted ", "warning");
+        showAlert("Note deleted ", "warning");
     }
+
     // Edit a note
     const editNote = async (id, title, description, tag) => {
         //API call
@@ -131,7 +133,7 @@ const NoteState = (props) => {
             }
         }
         setNotes(newNotes);
-        // showAlert("Note edited", "info");
+        showAlert("Note Saved", "info");
     }
 
     const likeNote = async (id, like) => {
@@ -156,7 +158,6 @@ const NoteState = (props) => {
             }
         }
         setNotes(newNotes);
-        // showAlert("Note edited", "info");
     }
 
 

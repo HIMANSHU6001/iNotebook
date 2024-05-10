@@ -27,7 +27,7 @@ function AddModal(props) {
         let error;
         if (!value) {
             error = 'Required';
-        } else if (value.length <= 2) {
+        } else if (value.length <= 5) {
             error = 'Description too short';
         }
         return error;
@@ -44,7 +44,7 @@ function AddModal(props) {
     }
 
     return (
-        <div tabIndex="-1" aria-hidden="true" hidden={!(props.isAddModalOpen)} className="w-full fixed z-50 top-5" >
+        <div tabIndex="-1" aria-hidden="true" hidden={!(props.isAddModalOpen)} className=" w-full fixed z-50 top-5" >
             <div className="relative mx-auto w-full max-w-md max-h-full" >
                 <div className="relative bg-white rounded-lg shadow border-2 border-gray-300">
                     <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
@@ -90,7 +90,7 @@ function AddModal(props) {
                                     </div>
                                     <div className='col-span-2 mt-4'>
                                         <label className="block mb-2 text-sm font-medium text-gray-900 " htmlFor="Description">Note Description</label>
-                                        <Field as='textarea' className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type Note Description" name="description" validate={validateDescription} />
+                                        <Field as='textarea' className=" bg-gray-50 h-60 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type Note Description" name="description" validate={validateDescription} />
                                         {errors.description && touched.description && <p className='float-right text-xs text-red-600'>{errors.description}</p>}
                                     </div>
                                 </div>
