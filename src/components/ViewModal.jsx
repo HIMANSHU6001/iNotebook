@@ -21,7 +21,7 @@ function ViewModal(props) {
                         </button>
                     </div>
                     <div className='overflow-auto min-h-80 max-h-[80vh]'>
-                            <p className='whitespace-pre-wrap flex items-center justify-between md:p-5'>
+                            <p className='whitespace-pre-wrap flex items-center justify-between p-5'>
                                 {props.note.description}
                             </p>
                     </div>

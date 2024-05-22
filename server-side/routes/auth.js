@@ -130,16 +130,17 @@ router.put("/updateuser/:id", fetchuser,
 // Route5: Authentication of user using googleOneTap: Post "/api/auth/googleonetap" - no login required
 router.post('/googleonetap', async (req, res) => {
   let success = false;
-  const { email, password } = req.body;
+  const { name, email, password, image } = req.body;
   try {
     let user = await User.findOne({ email });
     if (!user) {
       const salt = await bcrypt.genSalt(10);
-      const secPass = await bcrypt.hash(req.body.password, salt)
+      const secPass = await bcrypt.hash(password, salt)
       user = await User.create({
-        name: req.body.name,
-        email: req.body.email,
+        name: name,
+        email: email,
         password: secPass,
+        image: image
       });
 
       const data = {
@@ -147,7 +148,6 @@ router.post('/googleonetap', async (req, res) => {
           id: user.id
         }
       }
-
       const authToken = jwt.sign(data, process.env.JWT_SECRET);
       success = true;
       console.log("User Created");

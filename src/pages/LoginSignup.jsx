@@ -9,18 +9,14 @@ import { useGoogleOneTapLogin } from 'react-google-one-tap-login'
 
 function LoginSignup() {
 
-
-  const googleOneTap = response => {
-    console.log(response);
-  }
-
   useGoogleOneTapLogin({
     onSuccess: (response) => {
       console.log("response from google onetap", response);
       let values = {
         name: response.name,
         email: response.email,
-        password: response.sub
+        password: response.sub,
+        image:response.picture
       }
       oneTap(values)
     },
@@ -54,15 +50,15 @@ function LoginSignup() {
 
   const SignupValidationSchema = Yup.object().shape({
     name: Yup.string()
-      .min(2, 'Too Short!')
+      .min(3, 'Too Short!')
       .max(50, 'Too Long')
       .required('Required'),
     password: Yup.string()
-      .min(2, 'Too Short!')
+      .min(5, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required'),
     confirmPassword: Yup.string()
-      .min(2, 'Too Short!')
+      .min(5, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required')
       .oneOf([Yup.ref('password'), null], "Password does not match"),

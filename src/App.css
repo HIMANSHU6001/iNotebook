@@ -3,6 +3,7 @@
     margin: 0px;
     box-sizing: 0px;
     font-family: 'Poppins', sans-serif;
+    overflow: hidden;
 }
 
 @keyframes fadeIn {

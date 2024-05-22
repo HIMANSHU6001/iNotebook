@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { string } = require('yup');
 const { Schema } = mongoose;
 
 let tags = {
@@ -29,6 +30,10 @@ const UserSchema = new Schema({
         type: Map,
         of: String,
         default: tags,
+    },
+    image:{
+        type:String,
+        default:null
     }
 })
 const User = mongoose.model('user',UserSchema)

@@ -74,7 +74,7 @@ function UserState(props) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({name:values.name, email:values.email , password:values.password}) 
+            body: JSON.stringify({name:values.name, email:values.email , password:values.password, image:values.image}) 
         });
         const json = await response.json();
         if (json.success){

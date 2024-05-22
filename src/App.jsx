@@ -9,7 +9,6 @@ import NoteState from './context/notes/NoteState';
 import UserState from './context/notes/UserState';
 import Alert from './components/Alert';
 import Home from './pages/Home';
-import About from './pages/About';
 import LoginSignup from './pages/LoginSignup';
 
 
@@ -35,7 +34,6 @@ export default function App() {
         <UserState showAlert={showAlert}>
           <Alert alert={alert} closeAlert={closeAlert}/>
           <Routes>
-            <Route path="/about" element={<About />} />
             <Route path="/" element={<Home />} />
             <Route path="/loginsignup" element={<LoginSignup />} />
           </Routes>

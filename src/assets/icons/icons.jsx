@@ -98,8 +98,6 @@ const DownArrow = <svg className='inline ml-3' width="15" height="8" viewBox="0 
     <path d="M7.29289 8.70711C7.68342 9.09763 8.31658 9.09763 8.70711 8.70711L15.0711 2.34315C15.4616 1.95262 15.4616 1.31946 15.0711 0.928932C14.6805 0.538408 14.0474 0.538408 13.6569 0.928932L8 6.58579L2.34315 0.928932C1.95262 0.538408 1.31946 0.538408 0.928932 0.928932C0.538408 1.31946 0.538408 1.95262 0.928932 2.34315L7.29289 8.70711ZM7 7V8H9V7H7Z" fill="black" />
 </svg>
 
-
-
 const ClosedEye = <svg className='inline' width="25" height="25" viewBox="0 0 29 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="ant-design:eye-invisible-filled">
         <path id="Vector" d="M14.3867 14.6251C15.228 14.6251 16.0347 14.3485 16.6296 13.8562C17.2244 13.3639 17.5586 12.6963 17.5586 12.0001C17.5586 11.9232 17.5544 11.847 17.5464 11.7718L14.1109 14.615C14.2018 14.6216 14.2936 14.6251 14.3867 14.6251ZM24.8856 3.88038L23.6758 2.88007C23.6333 2.84493 23.5757 2.8252 23.5156 2.8252C23.4556 2.8252 23.398 2.84493 23.3555 2.88007L20.2595 5.44296C18.5516 4.72062 16.6318 4.35944 14.5 4.35944C9.05685 4.35944 4.99571 6.70554 2.31661 11.3977C2.20893 11.5864 2.15308 11.7925 2.15308 12.0012C2.15308 12.2099 2.20893 12.416 2.31661 12.6048C3.38712 14.4708 4.67617 15.9666 6.18375 17.0919L3.18775 19.5704C3.14529 19.6055 3.12144 19.6532 3.12144 19.7029C3.12144 19.7526 3.14529 19.8003 3.18775 19.8355L4.39674 20.836C4.43922 20.8711 4.49683 20.8909 4.55689 20.8909C4.61695 20.8909 4.67456 20.8711 4.71704 20.836L24.8856 4.14569C24.9067 4.12828 24.9234 4.1076 24.9348 4.08484C24.9462 4.06208 24.9521 4.03768 24.9521 4.01304C24.9521 3.9884 24.9462 3.964 24.9348 3.94124C24.9234 3.91847 24.9067 3.8978 24.8856 3.88038ZM9.40235 12.0001C9.40228 11.2876 9.62519 10.5872 10.0494 9.96723C10.4736 9.34723 11.0846 8.82873 11.8229 8.46225C12.5612 8.09576 13.4016 7.89378 14.2622 7.87598C15.1229 7.85818 15.9744 8.02518 16.7339 8.36069L15.357 9.50022C14.8017 9.35307 14.2081 9.33535 13.6415 9.449C13.0748 9.56265 12.5569 9.80329 12.1446 10.1445C11.7323 10.4857 11.4415 10.9143 11.3042 11.3833C11.1669 11.8523 11.1883 12.3435 11.3661 12.803L9.98915 13.9426C9.60275 13.3451 9.40115 12.6777 9.40235 12.0001V12.0001Z" fill="#8B8B8B" />
@@ -119,6 +117,49 @@ const Tick = <svg className="inline" width="12" height="10" viewBox="0 0 10 8" f
     <path id="Vector" d="M0 4.77668L0.883364 3.86567L3.12613 6.17798L9.11664 0L10 0.911009L3.12551 8L0 4.77668Z" fill="#8A8A8A" />
 </svg>
 
+const Hamburger = <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 1H20" stroke="black" stroke-width="1.5" />
+    <path d="M0 13H20" stroke="black" stroke-width="1.5" />
+    <path d="M0 7H20" stroke="black" stroke-width="1.5" />
+</svg>
 
 
-export { Home, Info, User, Trash, LogOut, Heart, LikedHeart,WhiteAdd, Add, Search, Edit, Filter, DownArrow, ClosedEye, OpenEye, Google, Tick };
+const Cross = <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1 0.5L13 13.5M1 13.5L13 0.5" stroke="black" stroke-width="1.5" />
+</svg>
+
+const HouseNav = <svg width="20" height="21" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9.02 3.34016L3.63 7.54016C2.73 8.24016 2 9.73016 2 10.8602V18.2702C2 20.5902 3.89 22.4902 6.21 22.4902H17.79C20.11 22.4902 22 20.5902 22 18.2802V11.0002C22 9.79016 21.19 8.24016 20.2 7.55016L14.02 3.22016C12.62 2.24016 10.37 2.29016 9.02 3.34016Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M12 18.4902V15.4902" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+
+const HouseRed = <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18.04 5.32018L12.28 1.29018C10.71 0.190182 8.29999 0.250182 6.78999 1.42018L1.77999 5.33018C0.77999 6.11018 -0.0100098 7.71018 -0.0100098 8.97018V15.8702C-0.0100098 18.4202 2.05999 20.5002 4.60999 20.5002H15.39C17.94 20.5002 20.01 18.4302 20.01 15.8802V9.10018C20.01 7.75018 19.14 6.09018 18.04 5.32018ZM10.75 16.5002C10.75 16.9102 10.41 17.2502 9.99999 17.2502C9.58999 17.2502 9.24999 16.9102 9.24999 16.5002V13.5002C9.24999 13.0902 9.58999 12.7502 9.99999 12.7502C10.41 12.7502 10.75 13.0902 10.75 13.5002V16.5002Z" fill="#FF1525" />
+</svg>
+
+const PlusNav = <svg width="25" height="25" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_d_65_2250)">
+        <path d="M18 1.5V25.5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M6 13.5H30" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+</svg>
+
+const PlusRed = <svg width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15 2.0293V27.5896" stroke="#FF1525" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M2.30762 14.8096H27.6922" stroke="#FF1525" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+
+const HeartNav = <svg className='mr-[12px] inline' width="20" height="20" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.26586 11.9075C7.55372 12.613 6.45077 12.613 5.73863 11.9075L1.49139 7.69955C-1.34994 4.85817 2.36033 -1.41946 7.00224 3.22245C11.636 -1.4113 15.3463 4.86643 12.5131 7.69955L8.26586 11.9075Z" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
+</svg>
+
+const LikedHeartNav = <svg className='mr-[12px] inline' width="20" height="20" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.26586 10.9075C7.55372 11.613 6.45077 11.613 5.73863 10.9075L1.49139 6.69955C-1.34994 3.85817 2.36033 -2.41946 7.00224 2.22245C11.636 -2.4113 15.3463 3.86643 12.5131 6.69955L8.26586 10.9075Z" fill="#FF4F5B" stroke="#FF1525" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+
+const FilterMob = <svg className='inline' width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fillRule="evenodd" clipRule="evenodd" d="M5 2C4.44772 2 4 2.44772 4 3V5.00001H20V3C20 2.44772 19.5523 2 19 2H5ZM19.7822 7.00001H4.21776C4.3321 7.22455 4.48907 7.42794 4.68299 7.59762L10.683 12.8476C11.437 13.5074 12.563 13.5074 13.317 12.8476L19.317 7.59762C19.5109 7.42794 19.6679 7.22455 19.7822 7.00001Z" fill="#FFFFFF" />
+<path fillRule="evenodd" clipRule="evenodd" d="M14 16.7049L14 10H10V18.7049L14 16.7049Z" fill="#FFFFFF" />
+</svg>
+
+export {FilterMob, HeartNav, LikedHeartNav, HouseNav, HouseRed, PlusNav, PlusRed, Hamburger, Cross, Home, Info, User, Trash, LogOut, Heart, LikedHeart, WhiteAdd, Add, Search, Edit, Filter, DownArrow, ClosedEye, OpenEye, Google, Tick };

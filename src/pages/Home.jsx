@@ -16,7 +16,6 @@ function Home() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   useEffect(() => {
-
     if (localStorage.getItem('token')) {
       console.log(localStorage.getItem('token'));
       fetchAllNotes();
@@ -29,10 +28,10 @@ function Home() {
   }, [])
   return (
     <div className='grid grid-flow-row grid-cols-12 grid-rows-1 h-[100vh]'>
-      <div className='col-span-2 h-[100vh]'>
+      <div className='col-span-2 h-[100vh] hidden lg:block'>
         <Sidebar setActive={setActive} active={active} isAddModalOpen={isAddModalOpen} setIsAddModalOpen={setIsAddModalOpen}/>
       </div>
-      <div className='col-span-10 h-[100vh]'>
+      <div className='col-span-12 lg:col-span-10 h-[100vh] border-2'>
         <Main setActive={setActive} active={active} isAddModalOpen={isAddModalOpen} setIsAddModalOpen={setIsAddModalOpen}/>
       </div>
     </div>
