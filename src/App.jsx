@@ -29,6 +29,8 @@ export default function App() {
   }
 
   return (
+    <>
+    <div>APPJS</div>
     <Router>
       <NoteState showAlert={showAlert}>
         <UserState showAlert={showAlert}>
@@ -40,5 +42,6 @@ export default function App() {
         </UserState>
       </NoteState>
     </Router>
+    </>
   )
 }
