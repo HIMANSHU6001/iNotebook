@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
@@ -30,7 +30,6 @@ export default function App() {
 
   return (
     <>
-    <div>APPJS</div>
     <Router>
       <NoteState showAlert={showAlert}>
         <UserState showAlert={showAlert}>
