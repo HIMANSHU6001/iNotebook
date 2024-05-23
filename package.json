@@ -10,7 +10,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "both": "concurrently \"npm run dev\" \"nodemon ./server-side/index\"",
-    "predeploy": "npm run build",
+    "predeploy": "",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
