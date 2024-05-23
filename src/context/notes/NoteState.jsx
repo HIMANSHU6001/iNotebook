@@ -1,8 +1,9 @@
 import NoteContext from "./noteContext";
 import { useState, useEffect } from 'react'
+import { configDotenv } from "dotenv";
 
 const NoteState = (props) => {
-    const host = "https://localhost:5000/"
+    const host = process.env.HOST;
     let notesInitial = []
     const [notes, setNotes] = useState(notesInitial);
     const [displayNotes, setDisplayNotes] = useState([])

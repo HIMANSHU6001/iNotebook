@@ -2,10 +2,11 @@ import React from 'react'
 import UserContext from './userContext'
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { config } from 'dotenv';
 
 function UserState(props) {
     const navigate = useNavigate()
-    const host = "https://localhost:5000/"
+    const host = process.env.HOST;
     const { showAlert } = props;
     let tagsInitial = {}
     const [currentTags, setTags] = useState(tagsInitial);
