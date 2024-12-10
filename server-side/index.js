@@ -5,13 +5,15 @@ var express = require("express");
 var cors = require("cors");
 var app = express();
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: 'https://i-notebook-frontend-cyan.vercel.app', // Frontend origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+app.use(cors(corsOptions));
 
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
 const port = 5000;
 app.use(express.json());
