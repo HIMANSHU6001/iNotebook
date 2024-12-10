@@ -5,7 +5,12 @@ var express = require("express");
 var cors = require("cors");
 var app = express();
 
-app.use(cors({}));
+app.use(
+  cors({
+    origin: [/^http:\/\/localhost:\d+$/],
+    credentials: true, // Allow session cookie to be sent cross-domain
+  })
+);
 
 const port = 5000;
 app.use(express.json());
