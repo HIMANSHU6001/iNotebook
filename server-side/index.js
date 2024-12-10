@@ -7,7 +7,7 @@ var app = express();
 
 app.use(
   cors({
-    origin: [/^http:\/\/localhost:\d+$/],
+    origin: ['http://localhost:5173'],
     credentials: true, // Allow session cookie to be sent cross-domain
   })
 );
