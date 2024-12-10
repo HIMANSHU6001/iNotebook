@@ -7,7 +7,7 @@ var app = express();
 
 app.use(
   cors({
-    origin: ['https://i-notebook-flax.vercel.app'],
+    origin: ['https://i-notebook-flax.vercel.app/'],
     credentials: true, 
   })
 );
