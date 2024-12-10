@@ -11,7 +11,6 @@ function LoginSignup() {
 
   useGoogleOneTapLogin({
     onSuccess: (response) => {
-      console.log("response from google onetap", response);
       let values = {
         name: response.name,
         email: response.email,
@@ -113,7 +112,6 @@ function LoginSignup() {
             }}
             validationSchema={LoginValidationSchema}
             onSubmit={values => {
-              console.log("login values => ", values);
               login(values)
             }}
           >
@@ -158,7 +156,6 @@ function LoginSignup() {
             }}
             validationSchema={SignupValidationSchema}
             onSubmit={values => {
-              console.log("signup values => ", values);
               signup(values);
             }}
           >

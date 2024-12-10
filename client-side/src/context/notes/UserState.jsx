@@ -12,10 +12,6 @@ function UserState(props) {
     const [currentTags, setTags] = useState(tagsInitial);
     const [user, setUser] = useState({})
 
-    useEffect(() => {
-        console.log("current tags => ",currentTags);
-      }, [currentTags])
-
 
     const getUserData = async() => {
         const url = `${host}/api/auth/getuser`

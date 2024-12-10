@@ -46,7 +46,6 @@ function AddTagModal(props) {
                         onSubmit={values => {
                             const tag = {}
                             tag[values.tagName] = colorPicked
-                            console.log(tag);
                             createTag(tag)
                             props.setIsAddTagOpen(false);
                         }}

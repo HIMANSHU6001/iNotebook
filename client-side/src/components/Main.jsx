@@ -52,7 +52,6 @@ export default function Main(props) {
   }
 
   const getNoteDescription = (note) => {
-    console.log(note);
     if (note.length > 100) {
       return note.slice(0, 100) + "..."
     }
@@ -109,10 +108,6 @@ export default function Main(props) {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
   }
-
-  useEffect(() => {
-    console.log("Current Notes are => ", notes);
-  }, [notes])
 
 
   return (
@@ -188,7 +183,7 @@ export default function Main(props) {
             <div className="col-span-1 py-2">
               <div className='ml-20 mt-1 absolute'>
                 <button onClick={() => { setDropdown(!dropdown) }} className="hidden md:flex text-white bg-red-400 hover:bg-red-600 rounded-md px-5 py-1.5" type="button">Sort <svg className="w-2.5 h-2. mx-3 5 my-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                 </svg>
                 </button>
                 <div hidden={!dropdown} className="z-10 overflow-visible fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
@@ -204,7 +199,7 @@ export default function Main(props) {
                     </li>
                     <li>
                       <button onClick={() => { setDoubleDropdown(!doubleDropdown) }} className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tags<svg className="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                       </svg>
                       </button>
                       <div hidden={!doubleDropdown} className="z-20 absolute left-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">

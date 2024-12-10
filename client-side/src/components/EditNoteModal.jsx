@@ -65,7 +65,6 @@ function EditModal(props) {
                             description: note.description,
                         }}
                         onSubmit={values => {
-                            console.log("feeding", note._id, values.title, values.description, values.tag);
                             editNote(note._id, values.title, values.description, values.tag)
                             props.setIsEditModalOpen(false);
                         }}

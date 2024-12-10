@@ -7,8 +7,8 @@ var app = express();
 
 app.use(
   cors({
-    origin: ['http://localhost:5173'],
-    credentials: true, // Allow session cookie to be sent cross-domain
+    origin: ['https://i-notebook-flax.vercel.app'],
+    credentials: true, 
   })
 );
 

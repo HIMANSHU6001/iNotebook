@@ -55,7 +55,7 @@ const Heart = <svg className='mr-[12px] inline' width="18" height="18" viewBox="
 </svg>
 
 const LikedHeart = <svg className='mr-[12px] inline' width="18" height="18" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8.26586 10.9075C7.55372 11.613 6.45077 11.613 5.73863 10.9075L1.49139 6.69955C-1.34994 3.85817 2.36033 -2.41946 7.00224 2.22245C11.636 -2.4113 15.3463 3.86643 12.5131 6.69955L8.26586 10.9075Z" fill="#FF4F5B" stroke="#FF1525" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M8.26586 10.9075C7.55372 11.613 6.45077 11.613 5.73863 10.9075L1.49139 6.69955C-1.34994 3.85817 2.36033 -2.41946 7.00224 2.22245C11.636 -2.4113 15.3463 3.86643 12.5131 6.69955L8.26586 10.9075Z" fill="#FF4F5B" stroke="#FF1525" strokeLinecap="round" strokeLinejoin="round" />
 </svg>
 
 
@@ -118,19 +118,19 @@ const Tick = <svg className="inline" width="12" height="10" viewBox="0 0 10 8" f
 </svg>
 
 const Hamburger = <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 1H20" stroke="black" stroke-width="1.5" />
-    <path d="M0 13H20" stroke="black" stroke-width="1.5" />
-    <path d="M0 7H20" stroke="black" stroke-width="1.5" />
+    <path d="M0 1H20" stroke="black" strokeWidth="1.5" />
+    <path d="M0 13H20" stroke="black" strokeWidth="1.5" />
+    <path d="M0 7H20" stroke="black" strokeWidth="1.5" />
 </svg>
 
 
 const Cross = <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1 0.5L13 13.5M1 13.5L13 0.5" stroke="black" stroke-width="1.5" />
+    <path d="M1 0.5L13 13.5M1 13.5L13 0.5" stroke="black" strokeWidth="1.5" />
 </svg>
 
 const HouseNav = <svg width="20" height="21" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M9.02 3.34016L3.63 7.54016C2.73 8.24016 2 9.73016 2 10.8602V18.2702C2 20.5902 3.89 22.4902 6.21 22.4902H17.79C20.11 22.4902 22 20.5902 22 18.2802V11.0002C22 9.79016 21.19 8.24016 20.2 7.55016L14.02 3.22016C12.62 2.24016 10.37 2.29016 9.02 3.34016Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M12 18.4902V15.4902" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9.02 3.34016L3.63 7.54016C2.73 8.24016 2 9.73016 2 10.8602V18.2702C2 20.5902 3.89 22.4902 6.21 22.4902H17.79C20.11 22.4902 22 20.5902 22 18.2802V11.0002C22 9.79016 21.19 8.24016 20.2 7.55016L14.02 3.22016C12.62 2.24016 10.37 2.29016 9.02 3.34016Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M12 18.4902V15.4902" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 </svg>
 
 const HouseRed = <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -139,14 +139,14 @@ const HouseRed = <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xml
 
 const PlusNav = <svg width="25" height="25" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g filter="url(#filter0_d_65_2250)">
-        <path d="M18 1.5V25.5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M6 13.5H30" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M18 1.5V25.5" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M6 13.5H30" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
     </g>
 </svg>
 
 const PlusRed = <svg width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M15 2.0293V27.5896" stroke="#FF1525" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M2.30762 14.8096H27.6922" stroke="#FF1525" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M15 2.0293V27.5896" stroke="#FF1525" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M2.30762 14.8096H27.6922" stroke="#FF1525" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
 </svg>
 
 const HeartNav = <svg className='mr-[12px] inline' width="20" height="20" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -154,7 +154,7 @@ const HeartNav = <svg className='mr-[12px] inline' width="20" height="20" viewBo
 </svg>
 
 const LikedHeartNav = <svg className='mr-[12px] inline' width="20" height="20" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8.26586 10.9075C7.55372 11.613 6.45077 11.613 5.73863 10.9075L1.49139 6.69955C-1.34994 3.85817 2.36033 -2.41946 7.00224 2.22245C11.636 -2.4113 15.3463 3.86643 12.5131 6.69955L8.26586 10.9075Z" fill="#FF4F5B" stroke="#FF1525" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M8.26586 10.9075C7.55372 11.613 6.45077 11.613 5.73863 10.9075L1.49139 6.69955C-1.34994 3.85817 2.36033 -2.41946 7.00224 2.22245C11.636 -2.4113 15.3463 3.86643 12.5131 6.69955L8.26586 10.9075Z" fill="#FF4F5B" stroke="#FF1525" strokeLinecap="round" strokeLinejoin="round" />
 </svg>
 
 const FilterMob = <svg className='inline' width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
