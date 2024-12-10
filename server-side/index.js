@@ -7,10 +7,19 @@ var app = express();
 
 app.use(
   cors({
-    origin: ['https://i-notebook-flax.vercel.app/'],
-    credentials: true, 
+    origin: ["https://i-notebook-flax.vercel.app"],
+    credentials: true,
   })
 );
+
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://i-notebook-flax.vercel.app"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 const port = 5000;
 app.use(express.json());
