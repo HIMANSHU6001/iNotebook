@@ -7,7 +7,7 @@ var app = express();
 
 app.use(
   cors({
-    origin: ["https://i-notebook-flax.vercel.app"],
+    origin: ["https://i-notebook-murex.vercel.app"],
     credentials: true,
   })
 );
@@ -15,7 +15,7 @@ app.use(
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://i-notebook-flax.vercel.app"
+    "https://i-notebook-murex.vercel.app"
   );
   res.header("Access-Control-Allow-Credentials", "true");
   next();
